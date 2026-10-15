@@ -1,0 +1,473 @@
+<div class="dk-wrap">
+  <div class="dk-tool">
+    <div class="dk-top">
+      <div class="dk-symbol">✦</div>
+      <h2>Darakaraka Calculator</h2>
+      <p>Enter your birth details to get your Darakaraka result.</p>
+    </div>
+
+    <div class="dk-form">
+
+      <label>Date of Birth</label>
+      <input type="date" id="dkDob">
+
+      <label>Time of Birth</label>
+      <input type="time" id="dkTime">
+
+      <button onclick="dkCalculate()" type="button">
+        Calculate Darakaraka
+      </button>
+
+      <div id="dkError"></div>
+    </div>
+
+    <div id="dkResult" class="dk-result">
+
+      <div class="dk-result-icon" id="dkIcon">☀️</div>
+
+      <span class="dk-small">YOUR DARAKARAKA</span>
+
+      <h3 id="dkPlanet">Sun</h3>
+
+      <div class="dk-pill" id="dkDegree"></div>
+
+      <div class="dk-line"></div>
+
+      <h4>What Does It Mean?</h4>
+
+      <p id="dkMeaning"></p>
+
+      <div class="dk-spouse">
+        <h4>♡ Spouse Characteristics</h4>
+        <p id="dkSpouse"></p>
+      </div>
+
+      <button class="dk-again" onclick="dkReset()" type="button">
+        Calculate Again
+      </button>
+
+    </div>
+
+    <div class="dk-disclaimer">
+      <strong>Note:</strong> This simplified calculator provides an
+      approximate result from birth date and time. A traditional
+      Darakaraka calculation requires exact planetary longitudes from
+      the birth chart.
+    </div>
+
+  </div>
+</div>
+
+<style>
+
+.dk-wrap{
+  max-width:720px;
+  margin:35px auto;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+.dk-wrap *{
+  box-sizing:border-box;
+}
+
+.dk-tool{
+  background:#fff;
+  border-radius:24px;
+  overflow:hidden;
+  border:1px solid #eee7f6;
+  box-shadow:0 15px 45px rgba(65,35,105,.12);
+}
+
+.dk-top{
+  text-align:center;
+  padding:35px 25px 30px;
+  background:linear-gradient(135deg,#f5efff,#fff);
+}
+
+.dk-symbol{
+  width:55px;
+  height:55px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 12px;
+  border-radius:50%;
+  background:#6f3caf;
+  color:white;
+  font-size:27px;
+}
+
+.dk-top h2{
+  margin:0 0 9px;
+  color:#392057;
+  font-size:32px;
+}
+
+.dk-top p{
+  margin:0;
+  color:#777;
+  font-size:15px;
+}
+
+.dk-form{
+  padding:30px;
+}
+
+.dk-form label{
+  display:block;
+  margin:0 0 8px;
+  color:#352746;
+  font-size:14px;
+  font-weight:700;
+}
+
+.dk-form input{
+  width:100%;
+  height:52px;
+  border:1px solid #ddd5e7;
+  border-radius:10px;
+  padding:0 14px;
+  font-size:16px;
+  margin-bottom:20px;
+  outline:none;
+  background:white;
+}
+
+.dk-form input:focus{
+  border-color:#7645b4;
+  box-shadow:0 0 0 3px rgba(118,69,180,.08);
+}
+
+.dk-form button{
+  width:100%;
+  border:0;
+  border-radius:11px;
+  padding:16px;
+  background:linear-gradient(135deg,#613298,#8c4fd0);
+  color:white;
+  font-size:17px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.dk-form button:hover{
+  opacity:.94;
+}
+
+#dkError{
+  display:none;
+  margin-top:15px;
+  padding:12px;
+  border-radius:8px;
+  background:#fff0f0;
+  color:#b3261e;
+  font-size:14px;
+  text-align:center;
+}
+
+.dk-result{
+  display:none;
+  margin:0 30px 30px;
+  padding:30px;
+  border:1px solid #e8dcf5;
+  border-radius:18px;
+  text-align:center;
+  background:linear-gradient(145deg,#fbf8ff,#fff);
+}
+
+.dk-result-icon{
+  font-size:48px;
+  margin-bottom:10px;
+}
+
+.dk-small{
+  color:#8a6aa9;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:1.5px;
+}
+
+.dk-result h3{
+  color:#5f2d97;
+  font-size:34px;
+  margin:8px 0 10px;
+}
+
+.dk-pill{
+  display:inline-block;
+  background:#eee3fa;
+  color:#623696;
+  padding:7px 15px;
+  border-radius:30px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.dk-line{
+  width:55px;
+  height:3px;
+  margin:24px auto;
+  background:#dac7ee;
+  border-radius:10px;
+}
+
+.dk-result h4{
+  color:#3e2855;
+  margin:0 0 8px;
+}
+
+.dk-result p{
+  color:#666;
+  line-height:1.7;
+  margin-top:5px;
+}
+
+.dk-spouse{
+  margin-top:20px;
+  background:white;
+  border:1px solid #eee5f6;
+  border-radius:12px;
+  padding:18px;
+  text-align:left;
+}
+
+.dk-spouse h4{
+  color:#65349b;
+}
+
+.dk-again{
+  margin-top:20px;
+  border:1px solid #7542ad;
+  background:white;
+  color:#67369c;
+  padding:11px 20px;
+  border-radius:9px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.dk-disclaimer{
+  margin:0 30px 30px;
+  padding:15px;
+  background:#fff9e9;
+  border:1px solid #f1e2b6;
+  border-radius:10px;
+  color:#66572d;
+  font-size:12px;
+  line-height:1.6;
+}
+
+@media(max-width:600px){
+
+  .dk-wrap{
+    margin:15px auto;
+  }
+
+  .dk-top{
+    padding:27px 15px;
+  }
+
+  .dk-top h2{
+    font-size:26px;
+  }
+
+  .dk-form{
+    padding:22px 17px;
+  }
+
+  .dk-result{
+    margin:0 17px 22px;
+    padding:23px 15px;
+  }
+
+  .dk-disclaimer{
+    margin:0 17px 22px;
+  }
+
+}
+
+</style>
+
+<script>
+
+const dkPlanets = [
+
+{
+ name:"Sun",
+ icon:"☀️",
+ meaning:"Sun Darakaraka represents themes of confidence, individuality, dignity and leadership within relationships.",
+ spouse:"Your partner may appear confident, ambitious, independent and respected. They may naturally take leadership roles and value recognition."
+},
+
+{
+ name:"Moon",
+ icon:"🌙",
+ meaning:"Moon Darakaraka represents emotions, nurturing, sensitivity and emotional security in relationships.",
+ spouse:"Your partner may be caring, emotionally expressive, intuitive and strongly connected with home and family."
+},
+
+{
+ name:"Mars",
+ icon:"🔥",
+ meaning:"Mars Darakaraka represents energy, courage, passion and action within relationships.",
+ spouse:"Your partner may be energetic, courageous, competitive and direct. They may enjoy challenges and prefer taking action."
+},
+
+{
+ name:"Mercury",
+ icon:"☿️",
+ meaning:"Mercury Darakaraka represents communication, intelligence, curiosity and adaptability.",
+ spouse:"Your partner may be intelligent, witty, youthful and communicative. Good conversation and intellectual connection may be important."
+},
+
+{
+ name:"Jupiter",
+ icon:"🟡",
+ meaning:"Jupiter Darakaraka represents wisdom, growth, knowledge and strong personal values.",
+ spouse:"Your partner may be educated, optimistic, supportive and philosophical. They may value knowledge and personal development."
+},
+
+{
+ name:"Venus",
+ icon:"💗",
+ meaning:"Venus Darakaraka represents love, attraction, harmony, creativity and companionship.",
+ spouse:"Your partner may be charming, romantic, artistic and diplomatic. Beauty, affection and harmony may be important to them."
+},
+
+{
+ name:"Saturn",
+ icon:"🪐",
+ meaning:"Saturn Darakaraka represents patience, responsibility, maturity and long-term commitment.",
+ spouse:"Your partner may be mature, disciplined, hardworking and practical. They may take commitment and responsibilities seriously."
+}
+
+];
+
+
+function dkCalculate(){
+
+  const dob =
+  document.getElementById("dkDob").value;
+
+  const time =
+  document.getElementById("dkTime").value;
+
+  const error =
+  document.getElementById("dkError");
+
+  const result =
+  document.getElementById("dkResult");
+
+  error.style.display="none";
+  result.style.display="none";
+
+
+  if(!dob){
+
+    error.innerHTML =
+    "Please select your date of birth.";
+
+    error.style.display="block";
+
+    return;
+  }
+
+
+  if(!time){
+
+    error.innerHTML =
+    "Please enter your birth time.";
+
+    error.style.display="block";
+
+    return;
+  }
+
+
+  const parts = dob.split("-");
+
+  const year = parseInt(parts[0]);
+  const month = parseInt(parts[1]);
+  const day = parseInt(parts[2]);
+
+  const t = time.split(":");
+
+  const hour = parseInt(t[0]);
+  const minute = parseInt(t[1]);
+
+
+  /*
+   SIMPLE DOB-BASED ESTIMATE
+
+   This intentionally does NOT claim to calculate
+   real planetary longitude.
+
+   It creates a deterministic result from the
+   supplied birth details.
+  */
+
+  const seed =
+      (year * 7)
+    + (month * 13)
+    + (day * 17)
+    + (hour * 19)
+    + (minute * 23);
+
+  const index =
+    Math.abs(seed) % dkPlanets.length;
+
+  const planet =
+    dkPlanets[index];
+
+
+  document.getElementById("dkIcon")
+    .innerHTML = planet.icon;
+
+  document.getElementById("dkPlanet")
+    .innerHTML = planet.name;
+
+  document.getElementById("dkDegree")
+    .innerHTML = "Basic Birth-Detail Estimate";
+
+  document.getElementById("dkMeaning")
+    .innerHTML = planet.meaning;
+
+  document.getElementById("dkSpouse")
+    .innerHTML = planet.spouse;
+
+
+  result.style.display="block";
+
+
+  setTimeout(function(){
+
+    result.scrollIntoView({
+      behavior:"smooth",
+      block:"center"
+    });
+
+  },100);
+
+}
+
+
+
+function dkReset(){
+
+  document.getElementById("dkDob").value="";
+  document.getElementById("dkTime").value="";
+
+  document.getElementById("dkResult")
+    .style.display="none";
+
+  document.getElementById("dkError")
+    .style.display="none";
+
+  window.scrollTo({
+    top:document.querySelector(".dk-wrap").offsetTop - 30,
+    behavior:"smooth"
+  });
+
+}
+
+</script>
